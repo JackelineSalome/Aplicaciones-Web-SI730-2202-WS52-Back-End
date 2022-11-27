@@ -137,19 +137,33 @@ namespace LearningCenter.API.Controllers
         // PUT: api/Categories/5
         [Authorize("root, admin")]
         [HttpPut("{id}")]
-        public Task<bool> Put(int id, [FromBody] Category category)
+        public async Task<IActionResult> Put(int id, [FromBody] Category category)
         {
-            var result = _categoryDomain.updateCategory(id, category);
-            return result;
+            try
+            {
+                var result = await _categoryDomain.updateCategory(id, category);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar");
+            }
         }
 
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
         [Authorize("root")]
-        public Boolean Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _categoryDomain.deleteCategory(id);
-            return result;
+            try
+            {
+                var result = await _categoryDomain.deleteCategory(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar");
+            }
 
         }
     }

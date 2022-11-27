@@ -8,6 +8,6 @@ public interface ICategoryDomain
     Task<Category> getCategoryById(int id);
     Task<bool> createCategory(Category category);
     Task<bool> updateCategory(int id, Category category);
-    Boolean deleteCategory(int id);
+    Task<bool> deleteCategory(int id);
 
 }

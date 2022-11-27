@@ -49,8 +49,8 @@ public class CategoryDomain : ICategoryDomain
         return _categoryRepository.Update(id, category);
     }
 
-    public bool deleteCategory(int id)
+    public async Task<bool>deleteCategory(int id)
     {
-        return _categoryRepository.Delete(id);
+        return await _categoryRepository.Delete(id);
     }
 }

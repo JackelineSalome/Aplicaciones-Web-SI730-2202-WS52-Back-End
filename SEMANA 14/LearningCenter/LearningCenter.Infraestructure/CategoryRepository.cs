@@ -5,7 +5,7 @@ namespace LearningCenter.Infraestructure;
 
 public class CategoryRepository : ICategoryRepository
 {
-    private LearningCenterDB _learningCenterDb;
+    private readonly LearningCenterDB _learningCenterDb;
     
     public CategoryRepository(LearningCenterDB learningCenterDb)
     {
@@ -34,7 +34,7 @@ public class CategoryRepository : ICategoryRepository
         //Conectar a la BD a API, al file --> datos
         return await _learningCenterDb.Categories
             .Include(category => category.Tutorials)
-            .SingleOrDefaultAsync(categery => categery.Id == id);
+            .SingleOrDefaultAsync(category => category.Id == id);
     }
 
     public async Task<bool> create(Category category)
@@ -90,7 +90,7 @@ public class CategoryRepository : ICategoryRepository
         return true;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         Category categorie = _learningCenterDb.Categories.Find(id);
 

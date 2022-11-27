@@ -8,7 +8,7 @@ public class Category:BaseModel
     
     public int? Quantity { get; set; }
     
-    public List<Tutorial> Tutorials { get; set; }
+    public List<Tutorial>? Tutorials { get; set; }
 
     
 }
